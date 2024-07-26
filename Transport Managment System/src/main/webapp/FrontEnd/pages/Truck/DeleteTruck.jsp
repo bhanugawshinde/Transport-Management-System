@@ -104,7 +104,7 @@
 
 </tfoot>
 </table>
-<button class="delete" onclick="deleteRow('http://localhost:8080/TruckTransport/DeleteTruck','http://localhost:8080/TruckTransport/ViewTruck?var=delete')">Delete</button>
+<button class="delete" onclick="deleteRow('http://localhost:8080/Transport-Managment-System/DeleteTruck','http://localhost:8080/Transport-Managment-System/ViewTruck?var=delete')">Delete</button>
 
 </body>
 </html>

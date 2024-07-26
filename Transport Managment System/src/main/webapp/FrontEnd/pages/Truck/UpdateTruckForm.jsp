@@ -172,7 +172,7 @@ Map<String, String> map = mapObject.entrySet().stream().collect(Collectors.toMap
      </div>
 </div>
 </form>
-<button class=button type="button" onclick="submit(event,'http://localhost:8080/TruckTransport/UpdateTruck','updateTruck','http://localhost:8080/TruckTransport/ViewTruck?var=update');">
+<button class=button type="button" onclick="submit(event,'http://localhost:8080/Transport-Managment-System/UpdateTruck','updateTruck','http://localhost:8080/Transport-Managment-System/ViewTruck?var=update');">
 Update Truck
 </button>
 <script type="text/javascript">

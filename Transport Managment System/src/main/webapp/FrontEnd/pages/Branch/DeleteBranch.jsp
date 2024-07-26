@@ -65,6 +65,6 @@
 </tbody>
 
 </table>
-<button class="delete" onclick="deleteRow('http://localhost:8080/TruckTransport/DeleteBranch','http://localhost:8080/TruckTransport/ViewBranch?var=delete')">Delete</button>
+<button class="delete" onclick="deleteRow('http://localhost:8080/Transport-Managment-System/DeleteBranch','http://localhost:8080/Transport-Managment-System/ViewBranch?var=delete')">Delete</button>
 </body>
 </html>

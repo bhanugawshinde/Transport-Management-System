@@ -101,7 +101,7 @@
      </div>    
 </div>
 </form>
-<button class=button type="button" onclick="submit(event,'http://localhost:8080/TruckTransport/AddEmployee','addemployee','http://localhost:8080/TruckTransport/ViewEmployee');">
+<button class=button type="button" onclick="submit(event,'http://localhost:8080/Transport-Managment-System/AddEmployee','addemployee','http://localhost:8080/Transport-Managment-System/ViewEmployee');">
 Add Employee
 </button>
 <script type="text/javascript">

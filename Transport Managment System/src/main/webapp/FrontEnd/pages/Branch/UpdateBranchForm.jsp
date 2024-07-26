@@ -97,7 +97,7 @@
      </div>	
 </div>
 </form>
-<button class=button type="button" onclick="submit(event,'http://localhost:8080/TruckTransport/UpdateBranch','updateBranch','http://localhost:8080/TruckTransport/ViewBranch?var=update');">Update Branch</button>
+<button class=button type="button" onclick="submit(event,'http://localhost:8080/Transport-Managment-System/UpdateBranch','updateBranch','http://localhost:8080/Transport-Managment-System/ViewBranch?var=update');">Update Branch</button>
 <script type="text/javascript">
 </script>
 </body>

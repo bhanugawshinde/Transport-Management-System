@@ -91,7 +91,7 @@
 		</div>
 	</form>
 	<button class=button type="button"
-		onclick="submit(event,'htt p://localhost:8080/TruckTransport/AddBranch','addBranch','http://localhost:8080/TruckTransport/ViewBranch');">
+		onclick="submit(event,'htt p://localhost:8080/Transport-Managment-System/AddBranch','addBranch','http://localhost:8080/Transport-Managment-System/ViewBranch');">
 		Add Branch</button>
 	<script type="text/javascript">
 		

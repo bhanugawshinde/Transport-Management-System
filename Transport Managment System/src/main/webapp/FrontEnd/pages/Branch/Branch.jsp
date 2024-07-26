@@ -32,16 +32,16 @@
 		<button class="close-btn" onclick="toggleMenu()">&times;</button>
 		<button id=home class="menu-itam" onclick="get('Branch','main')">Home</button>
 		<button id=view-branch class="menu-itam"
-			onclick="get('http://localhost:8080/TruckTransport/ViewBranch','page-content')">View
+			onclick="get('http://localhost:8080/Transport-Managment-System/ViewBranch','page-content')">View
 			Branch</button>
 		<button id=add-branch class="menu-itam"
 			onclick="get('FrontEnd/pages/Branch/AddBranch.jsp','page-content');">Add
 			Branch</button>
 		<button id=update-branch class="menu-itam"
-			onclick="get('http://localhost:8080/TruckTransport/ViewBranch?var=update','page-content')">Update
+			onclick="get('http://localhost:8080/Transport-Managment-System/ViewBranch?var=update','page-content')">Update
 			Branch</button>
 		<button id=delete-branch class="menu-itam"
-			onclick="get('http://localhost:8080/TruckTransport/ViewBranch?var=delete','page-content')">Delete
+			onclick="get('http://localhost:8080/Transport-Managment-System/ViewBranch?var=delete','page-content')">Delete
 			Branch</button>
 	</section>
 	<div id="main-content">

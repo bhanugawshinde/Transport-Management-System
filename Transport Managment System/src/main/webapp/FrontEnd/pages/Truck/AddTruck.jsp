@@ -162,7 +162,7 @@
      </div>
 </div>
 </form>
-<button class=button type="button" onclick="submit(event,'http://localhost:8080/TruckTransport/AddTruck','addTruck','http://localhost:8080/TruckTransport/ViewTruck');">
+<button class=button type="button" onclick="submit(event,'http://localhost:8080/Transport-Managment-System/AddTruck','addTruck','http://localhost:8080/Transport-Managment-System/ViewTruck');">
 Add Truck
 </button>
 <script type="text/javascript">
