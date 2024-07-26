@@ -13,10 +13,12 @@ import com.Aarogya.bean.BranchBean;
 
 
 public class BranchDao {
-	static Connection con = DBConnection.getConnection();
+	private static Connection con = DBConnection.getConnection();
+	private static PreparedStatement pstmt;
+	private static ResultSet rs;
 	public static boolean add(BranchBean branch) {
 		try{
-			PreparedStatement pstmt = con.prepareStatement("insert into branch values(getBranchId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			pstmt = con.prepareStatement("insert into branch values(getBranchId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			pstmt.setString(1, branch.getBranchName());
 			pstmt.setString(2, branch.getAddressLine1());
@@ -43,13 +45,22 @@ public class BranchDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return false;
 	}
 	public static List<BranchBean> view(){
 		List<BranchBean> list = new ArrayList<>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select * from branch");
-			ResultSet rs = pstmt.executeQuery();
+			pstmt = con.prepareStatement("select * from branch");
+			 rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BranchBean branchBean =  new BranchBean();
 				branchBean.setBranchId(rs.getString("BranchId"));
@@ -73,11 +84,26 @@ public class BranchDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return list;
 	}
 	public static boolean update(BranchBean bean) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("update branch set branchName=?, managerId=?, addressLine1=?, country=?, state=?, city=?, postalCode=?, latitude=?, longitude=?, phoneNumber=?, email=?, status=? where branchId=?");
+			pstmt = con.prepareStatement("update branch set branchName=?, managerId=?, addressLine1=?, country=?, state=?, city=?, postalCode=?, latitude=?, longitude=?, phoneNumber=?, email=?, status=? where branchId=?");
 			pstmt.setString(1, bean.getBranchName());
 			pstmt.setString(2, bean.getManagerId());
 			pstmt.setString(3, bean.getAddressLine1());
@@ -97,9 +123,20 @@ public class BranchDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		return false;
 	}
 	public static boolean delete(String[] ids) {
+		
 		if(ids.length==0)return true;
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -108,7 +145,7 @@ public class BranchDao {
 				sb.append(",");
 				sb.append("'"+ids[i]+"'");
 			}
-			PreparedStatement pstmt = con.prepareStatement("delete from branch where branchId in ("+sb.toString()+")");
+			pstmt = con.prepareStatement("delete from branch where branchId in ("+sb.toString()+")");
 			if(pstmt.executeUpdate()>0) {
 				return true;
 			}
@@ -117,12 +154,20 @@ public class BranchDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return false;
 	}
 	
 	public static int getTotal() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select count(*) from branch");
+			pstmt = con.prepareStatement("select count(*) from branch");
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
@@ -130,42 +175,95 @@ public class BranchDao {
 			e.printStackTrace();
 			return 0;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		return 0;
 	}
 	public static int getTotalState() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select count(distinct state) from branch");
-			ResultSet rs = pstmt.executeQuery();
+			pstmt = con.prepareStatement("select count(distinct state) from branch");
+			rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
+		}finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
 	
 	public static int getTotalManager() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select count(Distinct MANAGERID) from branch ");
-			ResultSet rs = pstmt.executeQuery();
+			pstmt = con.prepareStatement("select count(Distinct MANAGERID) from branch ");
+			rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return 0;
 	}
 	public static int getTotalActive() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select count(*) from branch where status='active'");
-			ResultSet rs = pstmt.executeQuery();
+			pstmt = con.prepareStatement("select count(*) from branch where status='active'");
+			rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}

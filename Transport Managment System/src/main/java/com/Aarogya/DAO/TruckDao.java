@@ -19,7 +19,8 @@ import com.Aarogya.util.Util;
 
 public class TruckDao {
 	static Connection con = DBConnection.getConnection();
-
+	private static PreparedStatement pstmt;
+	private static ResultSet rs;
 	public static boolean add(TruckBean truck) {
 		try {
 			con.setAutoCommit(false);
@@ -40,7 +41,7 @@ public class TruckDao {
 					? truckId + "ComplianceCertificates" + "." + filetype[1]
 					: null;
 
-			PreparedStatement pstmt = con.prepareStatement(
+			 pstmt = con.prepareStatement(
 					"INSERT INTO trucks (Truck_id, PROFILE, LICENSE_PLATE, COMPANY_NAME, MODEL, YEAR_OF_MANUFACTURE, VEHICLE_IDENTIFICATION_NUMBER, COLOR, TYPE, CAPACITY_WEIGHT, CAPACITY_VOLUME, REGISTRATION_STATE, REGISTRATION_EXPIRY_DATE, INSURANCE_POLICY_NUMBER, INSURANCE_EXPIRY_DATE, INSPECTION_DATE, COMPLIANCE_CERTIFICATES, CURRENT_MILEAGE, FUEL_TYPE, FUEL_EFFICIENCY, GPS_TRACKING_ID, ASSIGNED_DRIVER, MAINTENANCE_SCHEDULE, PURCHASE_DATE, PURCHASE_PRICE, DEPRECIATION, ADDITIONAL_EQUIPMENT, SAFETY_FEATURES, TELEMATICS_SYSTEM, SPECIAL_PERMITS, BRANCH_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			//
 			pstmt.setString(1, truckId);
@@ -93,13 +94,23 @@ public class TruckDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 	}
 
 	public static List<TruckBean> view() {
 		List<TruckBean> list = new ArrayList<>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM trucks");
-			ResultSet rs = pstmt.executeQuery();
+			 pstmt = con.prepareStatement("SELECT * FROM trucks");
+			 rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				TruckBean truckBean = new TruckBean();
@@ -139,6 +150,21 @@ public class TruckDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
@@ -194,7 +220,7 @@ public class TruckDao {
 		}
 		try {
 			
-			PreparedStatement pstmt = con.prepareStatement(query.toString());
+			 pstmt = con.prepareStatement(query.toString());
 
 			pstmt.setString(1, truck.getLicensePlate());
 			pstmt.setString(2, truck.getCompanyName());
@@ -235,6 +261,16 @@ public class TruckDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		return false;
 	}
 
@@ -248,7 +284,7 @@ public class TruckDao {
 				sb.append(",");
 				sb.append("'").append(ids[i]).append("'");
 			}
-			PreparedStatement pstmt = con
+			 pstmt = con
 					.prepareStatement("DELETE FROM trucks WHERE truck_id IN (" + sb.toString() + ")");
 			if (pstmt.executeUpdate() > 0) {
 				return true;
@@ -257,18 +293,42 @@ public class TruckDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		return false;
 	}
 	
 	public static int getTotal() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select count(*) from trucks");
-			ResultSet rs = pstmt.executeQuery();
+			 pstmt = con.prepareStatement("select count(*) from trucks");
+			 rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}

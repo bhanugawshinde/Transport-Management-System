@@ -14,9 +14,11 @@ import com.Aarogya.bean.ManagerBean;
 
 public class ManagerDao {
 	static Connection con = DBConnection.getConnection();
+	private static PreparedStatement pstmt;
+	private static ResultSet rs;
 	public static boolean add(ManagerBean manager) {
 		try{
-			PreparedStatement pstmt = con.prepareStatement("insert into manager(Manager_id,FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER,DATE_OF_BIRTH,HIRE_DATE,DEPARTMENT,ADDRESS, CITY,STATE,POSTAL_CODE,COUNTRY,BRANCH_ID,SALARY) values(getManagerId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			 pstmt = con.prepareStatement("insert into manager(Manager_id,FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER,DATE_OF_BIRTH,HIRE_DATE,DEPARTMENT,ADDRESS, CITY,STATE,POSTAL_CODE,COUNTRY,BRANCH_ID,SALARY) values(getManagerId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
 			pstmt.setString(1, manager.getFirstName());
 			pstmt.setString(2, manager.getLastName());
@@ -39,13 +41,23 @@ public class ManagerDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		return false;
 	}
 	public static List<ManagerBean> view(){
 		List<ManagerBean> list = new ArrayList<>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select * from manager");
-			ResultSet rs = pstmt.executeQuery();
+			 pstmt = con.prepareStatement("select * from manager");
+			 rs = pstmt.executeQuery();
 			while (rs.next()) {
 				ManagerBean managerBean = new ManagerBean();
 				managerBean.setManagerId(rs.getString("Manager_id"));
@@ -70,11 +82,26 @@ public class ManagerDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return list;
 	}
 	public static boolean update(ManagerBean bean) {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("update manager set first_name=?, last_Name=?, email=?, phone_Number=?, date_Of_Birth=?, hire_Date=?, department=?, address=?, city=?, state=?, postal_code=?, country=?, branch_Id=?, salary=? where manager_Id=?");
+			 pstmt = con.prepareStatement("update manager set first_name=?, last_Name=?, email=?, phone_Number=?, date_Of_Birth=?, hire_Date=?, department=?, address=?, city=?, state=?, postal_code=?, country=?, branch_Id=?, salary=? where manager_Id=?");
 			pstmt.setString(1, bean.getFirstName());
 			pstmt.setString(2, bean.getLastName());
 			pstmt.setString(3, bean.getEmail());
@@ -97,6 +124,16 @@ public class ManagerDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		return false;
 	}
 	public static boolean delete(String[] ids) {
@@ -108,7 +145,7 @@ public class ManagerDao {
 				sb.append(",");
 				sb.append("'"+ids[i]+"'");
 			}
-			PreparedStatement pstmt = con.prepareStatement("delete from manager where manager_id in ("+sb.toString()+")");
+			 pstmt = con.prepareStatement("delete from manager where manager_id in ("+sb.toString()+")");
 			if(pstmt.executeUpdate()>0) {
 				return true;
 			}
@@ -117,18 +154,36 @@ public class ManagerDao {
 			e.printStackTrace();
 			return false;
 		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		return false;
 	}
 	
 	public static int getTotal() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("select count(*) from manager");
+			 pstmt = con.prepareStatement("select count(*) from manager");
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 		return 0;
 	}
