@@ -16,7 +16,7 @@
 </style>
 </head>
 <body>
-<h2 class="formHead">View Truck</h2>
+<h2 class="formHead">Update Truck</h2>
 <%List<TruckBean> list = (List<TruckBean>)request.getAttribute("list");%>
 <table class="table">
 <thead>

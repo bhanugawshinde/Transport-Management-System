@@ -19,9 +19,19 @@ public class Truck extends HttpServlet{
 		HttpSession session = req.getSession();
 		if(session!=null) {
 			AdminBean adminBean = (AdminBean)session.getAttribute("adminBean");
-			int total = TruckDao.getTotal();
+			int totalTruck = TruckDao.getTotal();
+			float maxPrice = TruckDao.getMaxPrice();
+			float minPrice = TruckDao.getMinPrice();
+			float totalPrice = TruckDao.getTotalPrice();
+			float avgMileage = TruckDao.getAvarageMileage();
+			int totalCompanies = TruckDao.getTotalCompanies();
 			if(adminBean!=null) {
-				req.setAttribute("total", total);
+				req.setAttribute("totalTruck", totalTruck);
+				req.setAttribute("maxPrice", maxPrice);
+				req.setAttribute("minPrice", minPrice);
+				req.setAttribute("totalPrice", totalPrice);
+				req.setAttribute("avgMileage", avgMileage);
+				req.setAttribute("totalCompanies", totalCompanies);
 				req.getRequestDispatcher("FrontEnd/pages/Truck/Truck.jsp").forward(req, resp);
 			}
 		}else {

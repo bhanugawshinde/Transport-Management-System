@@ -19,9 +19,10 @@ import com.Aarogya.util.Util;
 
 public class TruckDao {
 	static Connection con = DBConnection.getConnection();
-	private static PreparedStatement pstmt;
-	private static ResultSet rs;
+
 	public static boolean add(TruckBean truck) {
+		PreparedStatement pstmt = null;
+		
 		try {
 			con.setAutoCommit(false);
 			Savepoint savepoint = con.setSavepoint();
@@ -108,6 +109,8 @@ public class TruckDao {
 
 	public static List<TruckBean> view() {
 		List<TruckBean> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			 pstmt = con.prepareStatement("SELECT * FROM trucks");
 			 rs = pstmt.executeQuery();
@@ -173,7 +176,8 @@ public class TruckDao {
 		StringBuilder query = new StringBuilder("UPDATE trucks SET LICENSE_PLATE=?, COMPANY_NAME=?, MODEL=?, YEAR_OF_MANUFACTURE=?, VEHICLE_IDENTIFICATION_NUMBER=?, COLOR=?, TYPE=?, CAPACITY_WEIGHT=?, CAPACITY_VOLUME=?, REGISTRATION_STATE=?, REGISTRATION_EXPIRY_DATE=?, INSURANCE_POLICY_NUMBER=?, INSURANCE_EXPIRY_DATE=?, INSPECTION_DATE=?, CURRENT_MILEAGE=?, FUEL_TYPE=?, FUEL_EFFICIENCY=?, GPS_TRACKING_ID=?, ASSIGNED_DRIVER=?, MAINTENANCE_SCHEDULE=?, PURCHASE_DATE=?, PURCHASE_PRICE=?, DEPRECIATION=?, ADDITIONAL_EQUIPMENT=?, SAFETY_FEATURES=?, TELEMATICS_SYSTEM=?, SPECIAL_PERMITS=?, BRANCH_ID=? ");
 		String truckId = truck.getTruckId();
 		String folder = ContextListner.path + File.separator + "Truck" + File.separator + truckId;
-
+		PreparedStatement pstmt = null;
+		
 		if (truck != null) {
 			
 			Map<String, String> profileMap = Util.stringToMap(truck.getProfile());
@@ -275,6 +279,8 @@ public class TruckDao {
 	}
 
 	public static boolean delete(String[] ids) {
+		PreparedStatement pstmt = null;
+		
 		if (ids.length == 0)
 			return true;
 		try {
@@ -306,6 +312,8 @@ public class TruckDao {
 	}
 	
 	public static int getTotal() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			 pstmt = con.prepareStatement("select count(*) from trucks");
 			 rs = pstmt.executeQuery();
@@ -333,6 +341,185 @@ public class TruckDao {
 		return 0;
 	}
 	
+	public static float getMaxPrice() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			 pstmt = con.prepareStatement("select max(PURCHASE_PRICE) from trucks");
+			 rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
 	
-
+	public static float getMinPrice() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			 pstmt = con.prepareStatement("select min(PURCHASE_PRICE) from trucks");
+			 rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static float getAvaragePrice() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			 pstmt = con.prepareStatement("select avg(PURCHASE_PRICE) from trucks");
+			 rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static float getTotalPrice() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			 pstmt = con.prepareStatement("select sum(PURCHASE_PRICE) from trucks");
+			 rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static float getAvarageMileage() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			 pstmt = con.prepareStatement("select avg(CURRENT_MILEAGE) from trucks");
+			 rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static int getTotalCompanies() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			 pstmt = con.prepareStatement("select count(COMPANY_NAME) from trucks");
+			 rs = pstmt.executeQuery();
+			if(rs.next())return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	
 }

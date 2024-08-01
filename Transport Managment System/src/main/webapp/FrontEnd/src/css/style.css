@@ -210,16 +210,18 @@ width: 45%;
     }
 }
 
-.container{
+.box{
 display: flex;
 font-family: Arial;
 justify-content: space-around;
+ flex-wrap: wrap;
 
 	
 }
 .item{
 	box-shadow: 0px 0px 5px #007bff57;
 	padding: 10px 20px;	
+	margin: 10px;
 }
 
 .item>h2{
@@ -236,3 +238,17 @@ justify-content: space-around;
 	font-size: 2rem;
 }
 
+.addButton, .updateButton {
+	font-size: 1.6rem;
+	color: #007bff;
+}
+.deleteButton{
+font-size: 1.6rem;
+	color: red;
+}
+.addButton:hover,  .updateButton:hover {
+	text-shadow: 0px 0px 3px #007bff;
+}
+.deleteButton:hover{
+	text-shadow: 0px 0px 3px #ff3939;
+}

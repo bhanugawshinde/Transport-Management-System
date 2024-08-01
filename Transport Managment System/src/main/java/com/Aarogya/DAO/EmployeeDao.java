@@ -14,9 +14,9 @@ import com.Aarogya.bean.EmployeeBean;
 
 public class EmployeeDao {
 	private static Connection con = DBConnection.getConnection();
-	private static PreparedStatement pstmt;
-	private static ResultSet rs;
+	
 	public static boolean add(EmployeeBean employee) {
+		PreparedStatement pstmt = null;
 		try{
 			pstmt = con.prepareStatement("insert into employee(Employee_id,FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER,DATE_OF_BIRTH,HIRE_DATE,DEPARTMENT,ADDRESS, CITY,STATE,POSTAL_CODE,COUNTRY,Manager_ID,BRANCH_ID,SALARY) values(getEmployeeId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
@@ -56,6 +56,8 @@ public class EmployeeDao {
 	
 	public static List<EmployeeBean> view(){
 		List<EmployeeBean> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = con.prepareStatement("select * from employee");
 			rs = pstmt.executeQuery();
@@ -103,6 +105,7 @@ public class EmployeeDao {
 	}
 	
 	public static boolean update(EmployeeBean bean) {
+		PreparedStatement pstmt = null;
 		try {
 			 pstmt = con.prepareStatement("update employee set first_name=?, last_Name=?, email=?, phone_Number=?, date_Of_Birth=?, hire_Date=?, department=?, address=?, city=?, state=?, postal_code=?, country=?, manager_id=?, branch_Id=?, salary=? where employee_Id=?");
 			pstmt.setString(1, bean.getFirstName());
@@ -142,6 +145,8 @@ public class EmployeeDao {
 	}
 	
 	public static boolean delete(String[] ids) {
+		PreparedStatement pstmt = null;
+		
 		if(ids.length==0)return true;
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -172,6 +177,8 @@ public class EmployeeDao {
 		return false;
 	}
 	public static int getTotal() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			 pstmt = con.prepareStatement("select count(*) from Employee");
 			 rs = pstmt.executeQuery();
@@ -198,4 +205,95 @@ public class EmployeeDao {
 		}
 		return 0;
 	}
+	
+	public static float getMaxSalary() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("select max(Salary) from Employee");
+			rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static float getAvarageSalary() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("select avg(Salary) from Employee");
+			rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static int getTotalDepartment() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("select count(Department) from Employee group by Department");
+			rs = pstmt.executeQuery();
+			if(rs.next())return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
 }

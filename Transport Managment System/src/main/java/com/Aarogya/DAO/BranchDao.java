@@ -14,9 +14,9 @@ import com.Aarogya.bean.BranchBean;
 
 public class BranchDao {
 	private static Connection con = DBConnection.getConnection();
-	private static PreparedStatement pstmt;
-	private static ResultSet rs;
+	
 	public static boolean add(BranchBean branch) {
+		PreparedStatement pstmt = null;
 		try{
 			pstmt = con.prepareStatement("insert into branch values(getBranchId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
@@ -57,10 +57,12 @@ public class BranchDao {
 		return false;
 	}
 	public static List<BranchBean> view(){
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
 		List<BranchBean> list = new ArrayList<>();
 		try {
 			pstmt = con.prepareStatement("select * from branch");
-			 rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				BranchBean branchBean =  new BranchBean();
 				branchBean.setBranchId(rs.getString("BranchId"));
@@ -102,6 +104,7 @@ public class BranchDao {
 		return list;
 	}
 	public static boolean update(BranchBean bean) {
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement("update branch set branchName=?, managerId=?, addressLine1=?, country=?, state=?, city=?, postalCode=?, latitude=?, longitude=?, phoneNumber=?, email=?, status=? where branchId=?");
 			pstmt.setString(1, bean.getBranchName());
@@ -136,7 +139,8 @@ public class BranchDao {
 		return false;
 	}
 	public static boolean delete(String[] ids) {
-		
+		PreparedStatement pstmt = null;
+	
 		if(ids.length==0)return true;
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -166,9 +170,11 @@ public class BranchDao {
 	}
 	
 	public static int getTotal() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = con.prepareStatement("select count(*) from branch");
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -187,6 +193,8 @@ public class BranchDao {
 		return 0;
 	}
 	public static int getTotalState() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = con.prepareStatement("select count(distinct state) from branch");
 			rs = pstmt.executeQuery();
@@ -214,6 +222,8 @@ public class BranchDao {
 	}
 	
 	public static int getTotalManager() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = con.prepareStatement("select count(Distinct MANAGERID) from branch ");
 			rs = pstmt.executeQuery();
@@ -241,6 +251,8 @@ public class BranchDao {
 		return 0;
 	}
 	public static int getTotalActive() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = con.prepareStatement("select count(*) from branch where status='active'");
 			rs = pstmt.executeQuery();

@@ -14,9 +14,10 @@ import com.Aarogya.bean.ManagerBean;
 
 public class ManagerDao {
 	static Connection con = DBConnection.getConnection();
-	private static PreparedStatement pstmt;
-	private static ResultSet rs;
+	
 	public static boolean add(ManagerBean manager) {
+		PreparedStatement pstmt = null;
+		
 		try{
 			 pstmt = con.prepareStatement("insert into manager(Manager_id,FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER,DATE_OF_BIRTH,HIRE_DATE,DEPARTMENT,ADDRESS, CITY,STATE,POSTAL_CODE,COUNTRY,BRANCH_ID,SALARY) values(getManagerId(),?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			
@@ -55,6 +56,8 @@ public class ManagerDao {
 	}
 	public static List<ManagerBean> view(){
 		List<ManagerBean> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			 pstmt = con.prepareStatement("select * from manager");
 			 rs = pstmt.executeQuery();
@@ -100,6 +103,8 @@ public class ManagerDao {
 		return list;
 	}
 	public static boolean update(ManagerBean bean) {
+		PreparedStatement pstmt = null;
+		
 		try {
 			 pstmt = con.prepareStatement("update manager set first_name=?, last_Name=?, email=?, phone_Number=?, date_Of_Birth=?, hire_Date=?, department=?, address=?, city=?, state=?, postal_code=?, country=?, branch_Id=?, salary=? where manager_Id=?");
 			pstmt.setString(1, bean.getFirstName());
@@ -137,6 +142,7 @@ public class ManagerDao {
 		return false;
 	}
 	public static boolean delete(String[] ids) {
+		PreparedStatement pstmt = null;
 		if(ids.length==0)return true;
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -167,9 +173,11 @@ public class ManagerDao {
 	}
 	
 	public static int getTotal() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			 pstmt = con.prepareStatement("select count(*) from manager");
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			if(rs.next())return rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -184,6 +192,96 @@ public class ManagerDao {
 				e.printStackTrace();
 			}
 
+		}
+		return 0;
+	}
+	
+	public static float getMaxSalary() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("select max(Salary) from Manager");
+			rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static float getAvarageSalary() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("select avg(Salary) from Manager");
+			rs = pstmt.executeQuery();
+			if(rs.next())return rs.getFloat(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public static int getTotalDepartment() {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement("select count(Department) from Manager group by Department");
+			rs = pstmt.executeQuery();
+			if(rs.next())return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+		finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}

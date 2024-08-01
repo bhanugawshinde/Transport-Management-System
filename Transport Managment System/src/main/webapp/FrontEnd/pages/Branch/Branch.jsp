@@ -19,11 +19,6 @@
 }
 </STYLE>
 
-
-<link rel="stylesheet" type="text/css"
-	href="../../node_modules/bootstrap-icons/font/bootstrap-icons.css"></link>
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
- -->
 <link rel="stylesheet" href="FrontEnd/src/css/style2.css"></link>
 </head>
 <body>
@@ -46,21 +41,44 @@
 	</section>
 	<div id="main-content">
 		<div id=page-content>
-			<div class="container">
-				<div class="item">
-					<h2>Total Branch</h2>
+			<div class="box">
+				<div class="item" onclick="event.stopPropagation(); executeSequentially('Branch', 'main', 'http://localhost:8080/Transport-Managment-System/ViewBranch', 'page-content')">
+					<div class="box" >
+						<span class="bi bi-plus-square addButton"
+							onclick="event.stopPropagation(); executeSequentially('Branch', 'main', 'FrontEnd/pages/Branch/AddBranch.jsp', 'page-content')"></span>
+						
+						<span class="bi bi-gear-wide-connected updateButton"
+							onclick="event.stopPropagation(); executeSequentially('Branch', 'main', 'http://localhost:8080/Transport-Managment-System/ViewBranch?var=update', 'page-content')"></span>
+						
+						<span class="bi bi-trash3 deleteButton"
+							onclick="event.stopPropagation(); executeSequentially('Branch', 'main', 'http://localhost:8080/Transport-Managment-System/ViewBranch?var=delete', 'page-content')"></span>
+						
+						</div>
+					<h2 class="mt-3">Total Branch</h2>
 					<div class="value">${total }</div>
 				</div>
 				<div class="item">
-					<h2>Total State</h2>
+					<h2 class="mt-3">Total State</h2>
 					<div class="value">${state }</div>
 				</div>
-				<div class="item">
-					<h2>Total Manager</h2>
+				<div class="item" >
+					<div class="box" onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewManager', 'page-content')">
+						<span class="bi bi-plus-square addButton"
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'FrontEnd/pages/Employee/AddManager.jsp', 'page-content')"></span>
+						
+						<span class="bi bi-gear-wide-connected updateButton"
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewManager?var=update', 'page-content')"></span>
+						
+						<span class="bi bi-trash3 deleteButton"
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewManager?var=delete', 'page-content')"></span>
+						
+						</div>
+					<h2 class="mt-3">Total Manager</h2>
 					<div class="value">${manager }</div>
 				</div>
+				
 				<div class="item">
-					<h2>Total Active</h2>
+					<h2 class="mt-3">Total Active</h2>
 					<div class="value">${active }</div>
 				</div>
 			</div>

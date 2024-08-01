@@ -26,8 +26,32 @@ box-shadow: 0px 0px 2px black;
 	<button id=delete-truck class="menu-itam" onclick="get('http://localhost:8080/Transport-Managment-System/ViewTruck?var=delete','page-content')">Delete Truck</button>
 </section>
 <div id="main-content">
-	<h1 class=head1>Truck Page</h1>
 	<div id=page-content>
+		<div class="box">
+				<div class="item" onclick="event.stopPropagation(); executeSequentially('Truck', 'main', 'http://localhost:8080/Transport-Managment-System/ViewTruck', 'page-content')">
+					<div class="box" >
+						<span class="bi bi-plus-square addButton"
+							onclick="event.stopPropagation(); executeSequentially('Truck', 'main', 'FrontEnd/pages/Truck/AddTruck.jsp', 'page-content')"></span>
+						
+						<span class="bi bi-gear-wide-connected updateButton"
+							onclick="event.stopPropagation(); executeSequentially('Truck', 'main', 'http://localhost:8080/Transport-Managment-System/ViewTruck?var=update', 'page-content')"></span>
+						
+						<span class="bi bi-trash3 deleteButton"
+							onclick="event.stopPropagation(); executeSequentially('Truck', 'main', 'http://localhost:8080/Transport-Managment-System/ViewTruck?var=delete', 'page-content')"></span>
+						
+						</div>
+					<h2 class="mt-3">Total Truck</h2>
+					<div class="value">${totalTruck }</div>
+				</div>				
+		</div>
+			<div class="box">
+				<div class="item color-1">Max Price: ${maxPrice }</div>
+				<div class="item color-1" >Min Price: ${minPrice }</div>
+				<div class="item color-1" >Total Price: ${totalPrice }</div>
+				<div class="item color-1" >Avg Mileage: ${avgMileage }</div>
+				<div class="item color-1" >Total Companies: ${totalCompanies }</div>
+			</div>
+	
 	
 	</div>
 </div>

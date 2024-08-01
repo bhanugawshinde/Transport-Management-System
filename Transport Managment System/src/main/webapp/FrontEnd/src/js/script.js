@@ -1,7 +1,7 @@
 /*Fetch data*/
 function get(action, id) {
 	document.getElementById("loader").style.display='inline-block';
-	fetch(action)
+	return fetch(action)
 		.then(resp => resp.text())
 		.then(data => {
 			document.getElementById("loader").style.display='none';
@@ -253,4 +253,12 @@ function send(rowId,action, id) {
 
 		} );
 	
+}
+
+function executeSequentially(action1, id1, action2, id2) {
+    get(action1, id1).then(() => {
+        return get(action2, id2);
+    }).catch(error => {
+        console.error('An error occurred:', error);
+    });
 }
