@@ -95,7 +95,7 @@
      </div>    
 </div>
 </form>
-<button class=button type="button" onclick="submit(event,'http://localhost:8080/Transport-Managment-System/AddManager','addmanager','http://localhost:8080/Transport-Managment-System/ViewManager');">
+<button class=button type="button" onclick="submit(event,'AddManager','addmanager','ViewManager');">
 Add Manager
 </button>
 <script type="text/javascript">

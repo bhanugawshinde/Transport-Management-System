@@ -24,26 +24,26 @@
 			onclick="get('FrontEnd/pages/Employee/AddManager.jsp','page-content');">Add
 			Manager</button>
 		<button id=view-manager class="menu-itam"
-			onclick="get('http://localhost:8080/Transport-Managment-System/ViewManager','page-content')">View
+			onclick="get('ViewManager','page-content')">View
 			Manager</button>
 		<button id=update-manager class="menu-itam"
-			onclick="get('http://localhost:8080/Transport-Managment-System/ViewManager?var=update','page-content')">Update
+			onclick="get('ViewManager?var=update','page-content')">Update
 			Manager</button>
 		<button id=delete-manager class="menu-itam"
-			onclick="get('http://localhost:8080/Transport-Managment-System/ViewManager?var=delete','page-content')">Delete
+			onclick="get('ViewManager?var=delete','page-content')">Delete
 			Manager</button>
 
 		<button id=add-employee class="menu-itam"
 			onclick="get('FrontEnd/pages/Employee/AddEmployee.jsp','page-content');">Add
 			employee</button>
 		<button id=view-employee class="menu-itam"
-			onclick="get('http://localhost:8080/Transport-Managment-System/ViewEmployee','page-content')">View
+			onclick="get('ViewEmployee','page-content')">View
 			employee</button>
 		<button id=update-employee class="menu-itam"
-			onclick="get('http://localhost:8080/Transport-Managment-System/ViewEmployee?var=update','page-content')">Update
+			onclick="get('ViewEmployee?var=update','page-content')">Update
 			employee</button>
 		<button id=delete-employee class="menu-itam"
-			onclick="get('http://localhost:8080/Transport-Managment-System/ViewEmployee?var=delete','page-content')">Delete
+			onclick="get('ViewEmployee?var=delete','page-content')">Delete
 			employee</button>
 	</section>
 	<div id="main-content">
@@ -51,15 +51,15 @@
 			<div class="box">
 				<div class="item">
 					<div class="box"
-						onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewEmployee', 'page-content')">
+						onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'ViewEmployee', 'page-content')">
 						<span class="bi bi-plus-square addButton"
 							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'FrontEnd/pages/Employee/AddEmployee.jsp', 'page-content')"></span>
 
 						<span class="bi bi-gear-wide-connected updateButton"
-							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewEmployee?var=update', 'page-content')"></span>
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'ViewEmployee?var=update', 'page-content')"></span>
 
 						<span class="bi bi-trash3 deleteButton"
-							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewEmployee?var=delete', 'page-content')"></span>
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'ViewEmployee?var=delete', 'page-content')"></span>
 
 					</div>
 					<h2 class="mt-3">Total Employee</h2>
@@ -68,15 +68,15 @@
 
 				<div class="item">
 					<div class="box"
-						onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewManager', 'page-content')">
+						onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'ViewManager', 'page-content')">
 						<span class="bi bi-plus-square addButton"
 							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'FrontEnd/pages/Employee/AddManager.jsp', 'page-content')"></span>
 
 						<span class="bi bi-gear-wide-connected updateButton"
-							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewManager?var=update', 'page-content')"></span>
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'ViewManager?var=update', 'page-content')"></span>
 
 						<span class="bi bi-trash3 deleteButton"
-							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'http://localhost:8080/Transport-Managment-System/ViewManager?var=delete', 'page-content')"></span>
+							onclick="event.stopPropagation(); executeSequentially('Employee', 'main', 'ViewManager?var=delete', 'page-content')"></span>
 
 					</div>
 					<h2 class="mt-3">Total Manager</h2>

@@ -73,7 +73,7 @@
 
 </tfoot>
 </table>
-<button class="delete" onclick="deleteRow('http://localhost:8080/Transport-Managment-System/DeleteManager','http://localhost:8080/Transport-Managment-System/ViewManager?var=delete')">Delete</button>
+<button class="delete" onclick="deleteRow('DeleteManager','ViewManager?var=delete')">Delete</button>
 
 </body>
 </html>
